@@ -25,7 +25,8 @@ const PORT = Number(process.env.PORT) || 3000;
 const DATA_DIR = path.resolve(process.env.DATA_DIR || '/data');
 const IMAGES = path.join(DATA_DIR, 'images');
 const TOKEN = (process.env.UPLOAD_TOKEN || '').trim();
-const PUBLIC_URL = (process.env.PUBLIC_URL || '').trim().replace(/\/+$/, '');
+let PUBLIC_URL = (process.env.PUBLIC_URL || '').trim().replace(/\/+$/, '');
+if (PUBLIC_URL && !/^https?:\/\//i.test(PUBLIC_URL)) PUBLIC_URL = 'https://' + PUBLIC_URL; // "img.example.com" → https://…
 const MAX_BYTES = (Number(process.env.MAX_UPLOAD_MB) || 25) * 1024 * 1024;
 
 const ID_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
